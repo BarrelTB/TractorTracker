@@ -8,8 +8,8 @@ namespace TractorTracker.Core.Models
 {
     public class Transmission : EquipmentBase
     {
-        public string Name { get; set; }
-        public string Type {  get; set; }
+        public string? Name { get; set; }
+        public string? Type {  get; set; }
         public DateTime LastFluidChange {  get; set; }
         public DateTime LastFilterChange { get; set; }
         public Equipment Equipment { get; set; }
