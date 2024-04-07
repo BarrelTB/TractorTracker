@@ -12,6 +12,11 @@ namespace TractorTracker.Core.Models
         public double LatLocation { get; set; }
         public double LongLocation { get; set; }
         public string FieldIdentifier { get; set; }
-        public List<Equipment> Equipment { get; set; }
+        public ICollection<Equipment> Equipment { get; set; } = new List<Equipment>();
+
+        public string ConvertLatLong (double lat, double lon)
+        {
+            return null;
+        }
     }
 }
