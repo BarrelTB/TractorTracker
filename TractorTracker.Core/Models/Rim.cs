@@ -8,7 +8,7 @@ namespace TractorTracker.Core.Models
 {
     public class Rim : EquipmentBase
     {
-        public string Brand { get; set; }
+        public string? Brand { get; set; }
         public int Size { get; set; }
         public int RustRating { get; set; }
         public Wheel Wheel {  get; set; }

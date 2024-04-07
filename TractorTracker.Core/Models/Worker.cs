@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TractorTracker.Core.Models
 {
-    public class Worker
+    public class Worker : EntityBase
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
