@@ -19,6 +19,8 @@ namespace TractorTracker.Core.Models
         public Location Location { get; set; }
         public int LocationId { get; set; }
         public ICollection<Worker> Workers { get; set; } = new List<Worker>();
+        public User User { get; set; }
+        public int UserId { get; set; }
 
     }
 }
