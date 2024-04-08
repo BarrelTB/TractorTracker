@@ -15,10 +15,7 @@ namespace TractorTracker.Core.Models
         public string TimeZoneInfo { get; set; }
         public ICollection<Equipment> Equipment { get; set; }
 
-        public List<Equipment> GetEquipmentWithOverdueChangeDates()
-        {
-            return null;
-        }
+
 
     }
 }
