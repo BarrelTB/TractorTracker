@@ -1,4 +1,4 @@
-namespace TractorTracker.Models
+namespace TractorTracker.Web.ViewModels
 {
     public class ErrorViewModel
     {

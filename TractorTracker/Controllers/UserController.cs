@@ -3,27 +3,27 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TractorTracker.Web.Controllers
 {
-    public class EquipmentController : Controller
+    public class UserController : Controller
     {
-        // GET: EquipmentController
+        // GET: UserController
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: EquipmentController/Details/5
+        // GET: UserController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: EquipmentController/Create
+        // GET: UserController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: EquipmentController/Create
+        // POST: UserController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -38,13 +38,13 @@ namespace TractorTracker.Web.Controllers
             }
         }
 
-        // GET: EquipmentController/Edit/5
+        // GET: UserController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: EquipmentController/Edit/5
+        // POST: UserController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -59,13 +59,13 @@ namespace TractorTracker.Web.Controllers
             }
         }
 
-        // GET: EquipmentController/Delete/5
+        // GET: UserController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: EquipmentController/Delete/5
+        // POST: UserController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
