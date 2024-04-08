@@ -1,6 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using TractorTracker.Models;
+using TractorTracker.Web.Models;
 
 namespace TractorTracker.Controllers
 {
@@ -18,11 +18,28 @@ namespace TractorTracker.Controllers
             return View();
         }
 
+        // POST: Home/Login
+        [HttpPost]
+        [Route("login")]
+        public IActionResult Login(string username, string password)
+        {
+            try
+            {
+                return RedirectToAction(nameof(User));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        [Route("privacy")]
         public IActionResult Privacy()
         {
             return View();
         }
 
+        [Route("error")]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
