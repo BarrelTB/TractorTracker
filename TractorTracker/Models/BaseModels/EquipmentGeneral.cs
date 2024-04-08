@@ -1,4 +1,4 @@
-﻿namespace TractorTracker.Web.Models
+﻿namespace TractorTracker.Web.Models.BaseModels
 {
     public class EquipmentGeneral
     {

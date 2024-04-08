@@ -1,6 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using TractorTracker.Models;
+using TractorTracker.Web.Models;
 
 namespace TractorTracker.Controllers
 {
@@ -16,6 +16,21 @@ namespace TractorTracker.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        // POST: EquipmentController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(IFormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         public IActionResult Privacy()

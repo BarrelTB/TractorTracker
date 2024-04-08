@@ -14,8 +14,7 @@ namespace TractorTracker.Application.Profiles
     {
         public AutoMapperConfigProfile() 
         {
-            CreateMap<User, UserDTO>();
-            CreateMap<UserDTO, User>();
+            CreateMap<User, UserDTO>().ReverseMap();
 
             CreateMap<Equipment, EquipmentDTO>();
             CreateMap<Equipment, EquipmentGeneralDTO>();
@@ -27,12 +26,10 @@ namespace TractorTracker.Application.Profiles
             CreateMap<Transmission, TransmissionDTO>();
             CreateMap<Wheel, WheelDTO>();
 
-            CreateMap<Worker, WorkerDTO>();
-            CreateMap<WorkerDTO, Worker>();
+            CreateMap<Worker, WorkerDTO>().ReverseMap();
             CreateMap<Location, LocationDTO>();
             CreateMap<Location, LocationGeneralDTO>();
-            CreateMap<Note, NoteDTO>();
-            CreateMap<NoteDTO, Note>();
+            CreateMap<Note, NoteDTO>().ReverseMap();
         }
     }
 }

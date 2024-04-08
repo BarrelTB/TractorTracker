@@ -1,6 +1,6 @@
-﻿using TractorTracker.Web.Models;
+﻿using TractorTracker.Web.Models.BaseModels;
 
-namespace TractorTracker.Web.ViewModels
+namespace TractorTracker.Web.Models
 {
     public class EquipmentViewModel
     {
