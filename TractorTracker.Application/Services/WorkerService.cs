@@ -12,6 +12,7 @@ namespace TractorTracker.Application.Services
     public class WorkerService
     {
         private readonly CoreDbContext _coreDbContext;
+        private readonly AutoMapper.Mapper _mapper;
         public bool AssignWorkerToEquipment(List<int> equipmentIds, string employeeIdNumber)
         {
             using (_coreDbContext) 

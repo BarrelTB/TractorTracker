@@ -15,6 +15,7 @@ namespace TractorTracker.Application.Profiles
         public AutoMapperConfigProfile() 
         {
             CreateMap<User, UserDTO>();
+            CreateMap<UserDTO, User>();
 
             CreateMap<Equipment, EquipmentDTO>();
             CreateMap<Equipment, EquipmentGeneralDTO>();

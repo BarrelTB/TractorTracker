@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TractorTracker.Application.DTOs
 {
-    public class TireDTO : EquipmentBaseDTO
+    public class TireDTO : EquipmentBase
     {
         public string Brand { get; set; }
         public string Size { get; set; }
