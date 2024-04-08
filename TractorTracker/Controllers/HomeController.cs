@@ -18,14 +18,14 @@ namespace TractorTracker.Controllers
             return View();
         }
 
-        // POST: EquipmentController/Create
+        // POST: Home/Login
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Index(IFormCollection collection)
+        [Route("login")]
+        public IActionResult Login(string username, string password)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(User));
             }
             catch
             {
@@ -33,11 +33,13 @@ namespace TractorTracker.Controllers
             }
         }
 
+        [Route("privacy")]
         public IActionResult Privacy()
         {
             return View();
         }
 
+        [Route("error")]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
