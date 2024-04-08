@@ -13,11 +13,27 @@ namespace TractorTracker.Application.Services
     {
         private readonly CoreDbContext _coreDbContext;
         private readonly AutoMapper.Mapper _mapper;
-        public UserDTO GetUser(string username, string password)
+        public UserDTO Login(string username, string password)
         {
             using (_coreDbContext)
             {
-                var user = _coreDbContext.User.Where(u => u.UserName == username && u.Password == password).First();
+                var user = _coreDbContext.User.Where(u => u.UserName == username && u.Password == password && u.IsDeleted == false).First();
+                return _mapper.Map<UserDTO>(user);
+            }
+        }
+        public UserDTO GetUserByUsername(string username) 
+        {
+            using (_coreDbContext)
+            {
+                var user = _coreDbContext.User.Where(u => u.UserName == username).First();
+                return _mapper.Map<UserDTO>(user);
+            }
+        }
+        public UserDTO GetUserById(int id)
+        {
+            using (_coreDbContext)
+            {
+                var user = _coreDbContext.User.Find(id);
                 return _mapper.Map<UserDTO>(user);
             }
         }

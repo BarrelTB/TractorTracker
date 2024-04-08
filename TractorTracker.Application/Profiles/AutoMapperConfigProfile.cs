@@ -28,9 +28,11 @@ namespace TractorTracker.Application.Profiles
             CreateMap<Wheel, WheelDTO>();
 
             CreateMap<Worker, WorkerDTO>();
+            CreateMap<WorkerDTO, Worker>();
             CreateMap<Location, LocationDTO>();
             CreateMap<Location, LocationGeneralDTO>();
             CreateMap<Note, NoteDTO>();
+            CreateMap<NoteDTO, Note>();
         }
     }
 }

@@ -13,23 +13,67 @@ namespace TractorTracker.Application.Services
     {
         private readonly CoreDbContext _coreDbContext;
         private readonly AutoMapper.Mapper _mapper;
-        public bool AssignWorkerToEquipment(List<int> equipmentIds, string employeeIdNumber)
+
+        public WorkerDTO GetWorker(int id)
         {
-            using (_coreDbContext) 
+            using (_coreDbContext)
+            {
+                var worker = _coreDbContext.Worker.Where(w => w.Id == id && w.IsDeleted == false).First();
+                return _mapper.Map<Worker, WorkerDTO>(worker);
+            }
+        }
+
+        public bool CreateOrUpdateWorker(WorkerDTO workerDTO)
+        {
+            //change to Id
+            using (_coreDbContext)
             {
                 try
                 {
-                    var worker = _coreDbContext.Worker.Where(e => e.EmployeeIdNumber == employeeIdNumber).FirstOrDefault();
+                    var worker = new Worker();
+                    if (workerDTO.EmployeeIdNumber != null)
+                    {
+                        //probably not needed if workerDTO contains appropriate Id
+                        worker = _coreDbContext.Worker.Find(workerDTO.EmployeeIdNumber);
+                        worker = _mapper.Map<WorkerDTO, Worker>(workerDTO);
+                        _coreDbContext.Worker.Update(worker);
+                    }
+                    else
+                    {
+                        worker = _mapper.Map<WorkerDTO, Worker>(workerDTO);
+                        _coreDbContext.Worker.Add(worker);
+                    }
 
-                    var equipment = new List<Equipment>();
-                    foreach (var id in equipmentIds)
-                    {
-                        equipment.Add(_coreDbContext.Equipment.Find(id));
-                    }
-                    foreach (var item in equipment)
-                    {
-                        item.Workers.Add(worker);
-                    }
+                    _coreDbContext.SaveChanges();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+                
+            }
+        }
+
+        //Implement employer entity, with one to many employer to worker relationship
+        /*public List<WorkerDTO> GetWorkers(int userId)
+        {
+            using (_coreDbContext)
+            {
+                var workers = _coreDbContext.Worker.Where(w => w.);
+                return _mapper.Map<Worker, WorkerDTO>(worker);
+            }
+        }*/
+
+        public bool DeleteWorker(int id)
+        {
+            using (_coreDbContext)
+            {
+                try
+                {
+                    var worker = _coreDbContext.Worker.Find(id);
+                    worker.IsDeleted = true;
+                    _coreDbContext.Worker.Update(worker);
                     _coreDbContext.SaveChanges();
                     return true;
                 }
