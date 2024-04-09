@@ -1,5 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using TractorTracker.Application.DTOs;
+using TractorTracker.Application.Services;
 using TractorTracker.Web.Models;
 
 namespace TractorTracker.Controllers
@@ -7,39 +9,21 @@ namespace TractorTracker.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly UserService _userService;
+        private readonly AutoMapper.Mapper _mapper;
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
 
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Index(UserViewModel userViewModel)
         {
             return View();
         }
 
-        // POST: Home/Login
-        [HttpPost]
-        [Route("login")]
-        public IActionResult Login(string username, string password)
-        {
-            try
-            {
-                return RedirectToAction(nameof(User));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        [Route("privacy")]
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [Route("error")]
+        [Route("Error")]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
