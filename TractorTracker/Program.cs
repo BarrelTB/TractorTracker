@@ -21,8 +21,28 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+/*app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");*/
+
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Login}/{action=Index}");
+
+app.MapControllerRoute(
+    name: "Home",
+    pattern: "{controller=Home}/{action=Index}");
+
+app.MapControllerRoute(
+    name: "User",
+    pattern: "{controller=User}/{action=Index}");
+
+app.MapControllerRoute(
+    name: "Equipment",
+    pattern: "{controller=Equipment}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "Note",
+    pattern: "{controller=Note}/{action=Index}/{id?}");
 
 app.Run();
