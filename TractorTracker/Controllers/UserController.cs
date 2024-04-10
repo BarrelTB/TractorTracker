@@ -1,35 +1,41 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TractorTracker.Application.DTOs;
+using TractorTracker.Application.Services.Interfaces;
+using TractorTracker.Web.Models;
 
 namespace TractorTracker.Web.Controllers
 {
     public class UserController : Controller
     {
-        // GET: UserController
-        public ActionResult Index()
-        {
-            return View();
-        }
 
-        // GET: UserController/Details/5
-        public ActionResult Details(int id)
+        private IUserService _userService;
+        private ILogger<UserController> _logger;
+        private IMapper _mapper;
+
+        public UserController(IUserService userService, ILogger<UserController> logger, IMapper mapper)
         {
-            return View();
+            _userService = userService;
+            _logger = logger;
+            _mapper = mapper;
         }
 
         // GET: UserController/Create
-        public ActionResult Create()
+        public IActionResult Create()
         {
-            return View();
+            UserViewModel model = new UserViewModel();
+            return View(model);
         }
 
         // POST: UserController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public IActionResult Create(UserViewModel userViewModel)
         {
             try
             {
+                var userDto = _mapper.Map<UserViewModel, UserDTO>(userViewModel);
+                _userService.CreateOrUpdateUser(userDto);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -39,7 +45,7 @@ namespace TractorTracker.Web.Controllers
         }
 
         // GET: UserController/Edit/5
-        public ActionResult Edit(int id)
+        public IActionResult Edit(int id)
         {
             return View();
         }
@@ -47,7 +53,7 @@ namespace TractorTracker.Web.Controllers
         // POST: UserController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public IActionResult Edit(int id, IFormCollection collection)
         {
             try
             {
@@ -60,7 +66,7 @@ namespace TractorTracker.Web.Controllers
         }
 
         // GET: UserController/Delete/5
-        public ActionResult Delete(int id)
+        public IActionResult Delete(int id)
         {
             return View();
         }
@@ -68,7 +74,7 @@ namespace TractorTracker.Web.Controllers
         // POST: UserController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public IActionResult Delete(int id, IFormCollection collection)
         {
             try
             {

@@ -13,7 +13,6 @@ namespace TractorTracker.Application.DTOs
         public string Password { get; set; }
         public string Email {  get; set; }
         public TimeZoneInfo TimeZoneInfo { get; set; }
-        public List<EquipmentDTO> Equipment { get; set; }
 
     }
 }

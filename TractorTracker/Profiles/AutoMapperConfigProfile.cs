@@ -9,7 +9,10 @@ namespace TractorTracker.Web.Profiles
     {
         public AutoMapperConfigProfile() 
         {
-            CreateMap<UserDTO, UserViewModel>().ReverseMap();
+            CreateMap<UserDTO, UserViewModel>()
+                .ForMember(dest => dest.TimeZoneId, opt => opt.MapFrom(src => src.TimeZoneInfo.Id));
+            CreateMap<UserViewModel, UserDTO>()
+                .ForMember(dest => dest.TimeZoneInfo, opt => opt.MapFrom(src => TimeZoneInfo.FindSystemTimeZoneById(src.TimeZoneId)));
             CreateMap<EquipmentGeneralDTO, EquipmentGeneral>().ReverseMap();
             CreateMap<ChassisDTO, Chassis>().ReverseMap();
             CreateMap<EngineDTO, Engine>().ReverseMap();

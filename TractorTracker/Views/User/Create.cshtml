@@ -1,0 +1,30 @@
+﻿@model TractorTracker.Web.Models.UserViewModel
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <form action="@Url.Action("Create", "User")" method="POST">
+        <label for="@Model.UserName">Username:</label><br>
+        <input type="text" id="userName" name="userName" required><br>
+        <label for="@Model.Password">Password:</label><br>
+        <input type="text" id="password" name="password" required><br>
+        <label for="@Model.Email">Email:</label><br>
+        <input type="text" id="email" name="email" required><br>
+        <label for="@Model.TimeZoneId">Timezone:</label><br>
+        <select id="timeZoneId" name="timeZoneId" required>
+            @foreach (var timezone in TimeZoneInfo.GetSystemTimeZones())
+            {
+                if (Model.TimeZoneId == timezone.Id)
+                {
+                    <option value="@timezone.Id" selected>@timezone.DisplayName</option>
+                }
+                else
+                {
+                    <option value="@timezone.Id">@timezone.DisplayName</option>
+                }
+
+            }
+        </select>
+        <br><br>
+        <input type="submit" value="Create">
+    </form>
+</div>

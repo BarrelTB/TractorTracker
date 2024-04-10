@@ -3,16 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using TractorTracker.Application.DTOs;
+using TractorTracker.Application.Services.Interfaces;
 using TractorTracker.Core;
 using TractorTracker.Core.Models;
 
 namespace TractorTracker.Application.Services
 {
-    public class WorkerService
+    public class WorkerService : IWorkerService
     {
         private readonly CoreDbContext _coreDbContext;
-        private readonly AutoMapper.Mapper _mapper;
+        private readonly IMapper _mapper;
+        public WorkerService(CoreDbContext coreDbContext, IMapper mapper)
+        {
+            _coreDbContext = coreDbContext;
+            _mapper = mapper;
+        }
 
         public WorkerDTO GetWorker(int id)
         {

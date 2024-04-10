@@ -14,7 +14,10 @@ namespace TractorTracker.Application.Profiles
     {
         public AutoMapperConfigProfile() 
         {
-            CreateMap<User, UserDTO>().ReverseMap();
+            CreateMap<User, UserDTO>()
+                .ForMember(dest => dest.TimeZoneInfo, opt => opt.MapFrom(src => TimeZoneInfo.FindSystemTimeZoneById(src.TimeZoneId)));
+            CreateMap<UserDTO, User>()
+                .ForMember(dest => dest.TimeZoneId, opt => opt.MapFrom(src => src.TimeZoneInfo.Id));
 
             CreateMap<Equipment, EquipmentDTO>();
             CreateMap<Equipment, EquipmentGeneralDTO>();

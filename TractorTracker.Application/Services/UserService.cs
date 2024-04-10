@@ -3,16 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using TractorTracker.Application.DTOs;
+using TractorTracker.Application.Services.Interfaces;
 using TractorTracker.Core;
 using TractorTracker.Core.Models;
 
 namespace TractorTracker.Application.Services
 {
-    public class UserService
+    public class UserService : IUserService
     {
         private readonly CoreDbContext _coreDbContext;
-        private readonly AutoMapper.Mapper _mapper;
+        private readonly IMapper _mapper;
+
+        public UserService(CoreDbContext coreDbContext, IMapper mapper)
+        {
+            _coreDbContext = coreDbContext;
+            _mapper = mapper;
+        }
+
         public UserDTO Login(string username, string password)
         {
             using (_coreDbContext)
@@ -44,7 +53,7 @@ namespace TractorTracker.Application.Services
                 try
                 {
                     var user = _coreDbContext.User.Find(id);
-                    user.TimeZoneInfo = timeZoneInfo.ToString();
+                    user.TimeZoneId = timeZoneInfo.Id;
                     _coreDbContext.SaveChanges();
                     return true;
                 }
@@ -62,10 +71,20 @@ namespace TractorTracker.Application.Services
             {
                 try
                 {
-                    var user = _coreDbContext.User.Find(userDTO.Id);
-                    user = _mapper.Map<UserDTO, User>(userDTO);
-
+                    var user = _mapper.Map<UserDTO, User>(userDTO);
+                    if (userDTO.Id <= 0)
+                    {
+                        _coreDbContext.User.Add(user);
+                    }
+                    else
+                    {
+                        var oldUser = _coreDbContext.User.Find(userDTO.Id);
+                        user.Id = oldUser.Id;
+                        _coreDbContext.User.Update(user);
+                    }
+                    
                     _coreDbContext.SaveChanges();
+
                     return true;
                 }
                 catch (Exception ex)
