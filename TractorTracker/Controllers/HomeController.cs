@@ -1,7 +1,7 @@
 using System.Diagnostics;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using TractorTracker.Application.DTOs;
-using TractorTracker.Application.Services;
+using TractorTracker.Application.Services.Interfaces;
 using TractorTracker.Web.Models;
 
 namespace TractorTracker.Controllers
@@ -9,12 +9,14 @@ namespace TractorTracker.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly UserService _userService;
-        private readonly AutoMapper.Mapper _mapper;
+        private readonly IUserService _userService;
+        private readonly IMapper _mapper;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IUserService userService, IMapper mapper)
         {
             _logger = logger;
+            _userService = userService;
+            _mapper = mapper;
         }
 
         [HttpGet]

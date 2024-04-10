@@ -1,8 +1,21 @@
+using TractorTracker.Application.Services;
+using TractorTracker.Application.Services.Interfaces;
+using AutoMapper;
+using AppAutoMapper = TractorTracker.Application.Profiles;
+using WebAutoMapper = TractorTracker.Web.Profiles;
+using TractorTracker.Core;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IEquipmentService, EquipmentService>();
+builder.Services.AddScoped<IWorkerService, WorkerService>();
+builder.Services.AddDbContext<CoreDbContext>();
+builder.Services.AddAutoMapper(typeof(AppAutoMapper.AutoMapperConfigProfile));
+builder.Services.AddAutoMapper(typeof(WebAutoMapper.AutoMapperConfigProfile));
 
 var app = builder.Build();
 

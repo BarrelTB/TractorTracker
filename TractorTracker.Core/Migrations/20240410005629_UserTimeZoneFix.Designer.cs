@@ -11,15 +11,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TractorTracker.Core.Migrations
 {
     [DbContext(typeof(CoreDbContext))]
-    [Migration("20240407051821_AddEntityBaseWithIsDeletedDeleteBehavRestricted")]
-    partial class AddEntityBaseWithIsDeletedDeleteBehavRestricted
+    [Migration("20240410005629_UserTimeZoneFix")]
+    partial class UserTimeZoneFix
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.3")
+                .HasAnnotation("ProductVersion", "8.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -435,7 +435,7 @@ namespace TractorTracker.Core.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TimeZoneInfo")
+                    b.Property<string>("TimeZoneId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

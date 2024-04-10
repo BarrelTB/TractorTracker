@@ -2,11 +2,21 @@
 using Microsoft.AspNetCore.Mvc;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using TractorTracker.Web.Models;
+using TractorTracker.Application.Services.Interfaces;
 
 namespace TractorTracker.Web.Controllers
 {
     public class LoginController : Controller
     {
+        private ILogger<LoginController> _logger;
+        private IUserService _userService;
+
+        public LoginController(ILogger<LoginController> logger, IUserService userService)
+        {
+            _logger = logger;
+            _userService = userService;
+        }
+
         // GET: HomeController1
         public ActionResult Index()
         {
