@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using TractorTracker.Application.DTOs;
 using TractorTracker.Application.Services.Interfaces;
 using TractorTracker.Web.Models;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace TractorTracker.Web.Controllers
 {
@@ -35,12 +36,32 @@ namespace TractorTracker.Web.Controllers
             try
             {
                 var userDto = _mapper.Map<UserViewModel, UserDTO>(userViewModel);
-                _userService.CreateOrUpdateUser(userDto);
-                return RedirectToAction(nameof(Index));
+                var userId = _userService.CreateOrUpdateUser(userDto);
+                if(userId > 0)
+                {
+                    Response.Cookies.Append("userId", userId.ToString(), new CookieOptions
+                    {
+                        Expires = DateTimeOffset.UtcNow.AddHours(1),
+                        //Domain = ".example.com",
+                        Path = "/",
+                        //Secure = true,
+                        //HttpOnly = true,
+                        //SameSite = SameSiteMode.Strict
+                    });
+
+                    return RedirectToAction(nameof(Index), "Home");
+                }
+                else
+                {
+                    throw new Exception("User failed to be created");
+                }
+
+                
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                // log error
+                return RedirectToAction(nameof(Error));
             }
         }
 

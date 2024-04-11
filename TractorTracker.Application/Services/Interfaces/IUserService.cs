@@ -11,10 +11,10 @@ namespace TractorTracker.Application.Services.Interfaces
 {
     public interface IUserService
     {
-        public UserDTO Login(string username, string password);
+        public int Login(string username, string password);
         public UserDTO GetUserByUsername(string username);
         public UserDTO GetUserById(int id);
         public bool SetUserTimeZone(int id, TimeZoneInfo timeZoneInfo);
-        public bool CreateOrUpdateUser(UserDTO userDTO);
+        public int CreateOrUpdateUser(UserDTO userDTO);
     }
 }

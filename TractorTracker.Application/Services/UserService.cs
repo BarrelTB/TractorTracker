@@ -22,12 +22,12 @@ namespace TractorTracker.Application.Services
             _mapper = mapper;
         }
 
-        public UserDTO Login(string username, string password)
+        public int Login(string username, string password)
         {
             using (_coreDbContext)
             {
-                var user = _coreDbContext.User.Where(u => u.UserName == username && u.Password == password && u.IsDeleted == false).First();
-                return _mapper.Map<UserDTO>(user);
+                var id = _coreDbContext.User.Where(u => u.UserName == username && u.Password == password && u.IsDeleted == false).First().Id;
+                return id;
             }
         }
         public UserDTO GetUserByUsername(string username) 
@@ -65,7 +65,7 @@ namespace TractorTracker.Application.Services
             }
         }
 
-        public bool CreateOrUpdateUser(UserDTO userDTO)
+        public int CreateOrUpdateUser(UserDTO userDTO)
         {
             using (_coreDbContext)
             {
@@ -75,21 +75,22 @@ namespace TractorTracker.Application.Services
                     if (userDTO.Id <= 0)
                     {
                         _coreDbContext.User.Add(user);
+                        _coreDbContext.SaveChanges();
+                        return user.Id;
                     }
                     else
                     {
                         var oldUser = _coreDbContext.User.Find(userDTO.Id);
                         user.Id = oldUser.Id;
                         _coreDbContext.User.Update(user);
+                        _coreDbContext.SaveChanges();
+                        return user.Id;
                     }
                     
-                    _coreDbContext.SaveChanges();
-
-                    return true;
                 }
                 catch (Exception ex)
                 {
-                    return false;
+                    return 0;
                 }
 
             }
