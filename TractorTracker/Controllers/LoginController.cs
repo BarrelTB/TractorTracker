@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using static System.Runtime.InteropServices.JavaScript.JSType;
-using TractorTracker.Web.Models;
 using TractorTracker.Application.Services.Interfaces;
+using AutoMapper;
 
 namespace TractorTracker.Web.Controllers
 {
@@ -10,11 +9,13 @@ namespace TractorTracker.Web.Controllers
     {
         private ILogger<LoginController> _logger;
         private IUserService _userService;
+        private IMapper _mapper;
 
-        public LoginController(ILogger<LoginController> logger, IUserService userService)
+        public LoginController(ILogger<LoginController> logger, IUserService userService, IMapper mapper)
         {
             _logger = logger;
             _userService = userService;
+            _mapper = mapper;
         }
 
         // GET: HomeController1
@@ -28,24 +29,31 @@ namespace TractorTracker.Web.Controllers
         {
             try
             {
-                //login code here
-                //var user = _userService.Login(username, password);
-                //var userViewModel = _mapper.Map<UserDTO, UserViewModel>(user);
-                /*var userViewModel = new UserViewModel();
-                userViewModel.UserName = username;
-                userViewModel.Password = password;
-                userViewModel.TimeZoneInfo = TimeZoneInfo.Utc;
-                userViewModel.Email = "email@email.com";*/
+                var userId = _userService.Login(username, password);
+                if(userId > 0)
+                {
+                    Response.Cookies.Append("userId", userId.ToString(), new CookieOptions
+                    {
+                        Expires = DateTimeOffset.UtcNow.AddHours(1),
+                        //Domain = ".example.com",
+                        Path = "/",
+                        //Secure = true,
+                        //HttpOnly = true,
+                        //SameSite = SameSiteMode.Strict
+                    });
 
-                //call to user login just needs to return user id
-                //user id then needs to be added as a cookie via session storage
-                //This way when user acccesses user settings page their info can be pulled and modified as necessary
+                    return RedirectToAction("Index", "Home");
+                } 
+                else
+                {
+                    throw new Exception("Username or Password incorrect");
+                }
 
-                return RedirectToAction("Index", "Home");
+                
             }
             catch (Exception ex)
             {
-                //_logger.LogError(ex);
+                // log error
                 return RedirectToAction(nameof(Error));
             }
         }

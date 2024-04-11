@@ -4,6 +4,6 @@ namespace TractorTracker.Web.Models
 {
     public class EquipmentListViewModel
     {
-        List<EquipmentGeneral> EquipmentList { get; set; }
+        public List<EquipmentGeneral> EquipmentList { get; set; }
     }
 }

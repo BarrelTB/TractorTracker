@@ -1,8 +1,25 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model TractorTracker.Web.Models.EquipmentListViewModel
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div>
+    @if(Model != null && Model.EquipmentList.Count > 0)
+    {
+        @foreach (var equipment in Model.EquipmentList)
+        {
+            <div class="equipment-general-box">
+                <a asp-controller="Equipment" asp-action="Details" asp-route-id="@equipment.Id" class="btn">@equipment.Name</a>
+                <ul>
+                    <li>@Html.Label("SerialNumber", "Serial Number") @equipment.Id</li>
+                    <li>@Html.Label("Type") @equipment.Type</li>
+                    <li>@Html.Label("Location") @equipment.Location</li>
+                    <li>@Html.Label("Description") @equipment.Description</li>
+                </ul>
+            </div>
+
+        }
+    }
+    else
+    {
+        <p>You currently have no active equipment, please add some equipment!</p>
+    }
+    <a asp-controller="Equipment" asp-action="Create" class="btn btn-primary">Add Equipment</a>
 </div>
