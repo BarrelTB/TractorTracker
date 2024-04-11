@@ -13,10 +13,11 @@ namespace TractorTracker.Web.Profiles
                 .ForMember(dest => dest.TimeZoneId, opt => opt.MapFrom(src => src.TimeZoneInfo.Id));
             CreateMap<UserViewModel, UserDTO>()
                 .ForMember(dest => dest.TimeZoneInfo, opt => opt.MapFrom(src => TimeZoneInfo.FindSystemTimeZoneById(src.TimeZoneId)));
-            CreateMap<EquipmentGeneralDTO, EquipmentGeneral>().ReverseMap();
+            CreateMap<EquipmentGeneralDTO, EquipmentGeneralViewModel>().ReverseMap();
             CreateMap<ChassisDTO, Chassis>().ReverseMap();
             CreateMap<EngineDTO, Engine>().ReverseMap();
             CreateMap<LocationDTO, Location>().ReverseMap();
+            CreateMap<LocationGeneralDTO, LocationGeneral>().ReverseMap();
             CreateMap<NoteDTO, Note>().ReverseMap();
             CreateMap<PartDTO, Part>().ReverseMap();
             CreateMap<TransmissionDTO, Transmission>().ReverseMap();
