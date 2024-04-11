@@ -19,19 +19,19 @@ namespace TractorTracker.Application.Profiles
             CreateMap<UserDTO, User>()
                 .ForMember(dest => dest.TimeZoneId, opt => opt.MapFrom(src => src.TimeZoneInfo.Id));
 
-            CreateMap<Equipment, EquipmentDTO>();
-            CreateMap<Equipment, EquipmentGeneralDTO>();
-            CreateMap<Chassis, ChassisDTO>();
-            CreateMap<Engine, EngineDTO>();
-            CreateMap<Part, PartDTO>();
-            CreateMap<Rim, RimDTO>();
-            CreateMap<Tire, TireDTO>();
-            CreateMap<Transmission, TransmissionDTO>();
-            CreateMap<Wheel, WheelDTO>();
+            CreateMap<Equipment, EquipmentDTO>().ReverseMap();
+            CreateMap<Equipment, EquipmentGeneralDTO>().ReverseMap();
+            CreateMap<Chassis, ChassisDTO>().ReverseMap();
+            CreateMap<Engine, EngineDTO>().ReverseMap();
+            CreateMap<Part, PartDTO>().ReverseMap();
+            CreateMap<Rim, RimDTO>().ReverseMap();
+            CreateMap<Tire, TireDTO>().ReverseMap();
+            CreateMap<Transmission, TransmissionDTO>().ReverseMap();
+            CreateMap<Wheel, WheelDTO>().ReverseMap();
 
             CreateMap<Worker, WorkerDTO>().ReverseMap();
-            CreateMap<Location, LocationDTO>();
-            CreateMap<Location, LocationGeneralDTO>();
+            CreateMap<Location, LocationDTO>().ReverseMap();
+            CreateMap<Location, LocationGeneralDTO>().ReverseMap();
             CreateMap<Note, NoteDTO>().ReverseMap();
         }
     }

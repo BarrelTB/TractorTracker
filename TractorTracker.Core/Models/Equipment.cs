@@ -22,21 +22,5 @@ namespace TractorTracker.Core.Models
         public User? User { get; set; }
         public int UserId { get; set; }
 
-        public Equipment(string name, string? description, string? type, Engine? engine, Chassis? chassis, Transmission? transmission, ICollection<Part> parts, ICollection<Note> notes, ICollection<Worker> workers)
-        {
-            Name = name;
-            Description = description;
-            Type = type;
-            Engine = engine;
-            Chassis = chassis;
-            Transmission = transmission;
-            Parts = parts;
-            Notes = notes;
-            Workers = workers;
-        }
-
-        public Equipment()
-        {
-        }
     }
 }

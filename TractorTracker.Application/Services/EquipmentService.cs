@@ -31,6 +31,17 @@ namespace TractorTracker.Application.Services
       
         }
 
+        public List<EquipmentGeneralDTO> GetAllEquipmentGeneralForUser(int userId)
+        {
+            using (_coreDbContext)
+            {
+                var equipment = _coreDbContext.Equipment.Where(e => e.User.Id == userId && e.IsDeleted == false).ToList();
+                var equipmentGeneralDTOs = _mapper.Map<List<Equipment>, List<EquipmentGeneralDTO>>(equipment);
+                return equipmentGeneralDTOs;
+            }
+
+        }
+
         public EquipmentDTO GetSingleEquipmentForUser(int id)
         {
             using (_coreDbContext)
@@ -77,6 +88,28 @@ namespace TractorTracker.Application.Services
                         equipment.Workers.Add(worker);
                     }
                     _coreDbContext.Equipment.UpdateRange(listOfEquipment);
+                    _coreDbContext.SaveChanges();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+
+            }
+        }
+
+        public bool CreateEquipmentFromGeneral(EquipmentGeneralDTO equipmentGeneralDTO, int userId)
+        {
+            using (_coreDbContext)
+            {
+                try
+                {
+                    var equipmentGeneral = _mapper.Map<EquipmentGeneralDTO, Equipment>(equipmentGeneralDTO);
+                    equipmentGeneral.UserId = userId;
+                    _coreDbContext.Location.Add(equipmentGeneral.Location);
+
+                    _coreDbContext.Equipment.Add(equipmentGeneral);
                     _coreDbContext.SaveChanges();
                     return true;
                 }

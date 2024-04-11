@@ -13,6 +13,8 @@ namespace TractorTracker.Application.Services.Interfaces
     {
         List<EquipmentDTO> GetAllEquipmentForUser(int userId);
 
+        List<EquipmentGeneralDTO> GetAllEquipmentGeneralForUser(int userId);
+
 
         EquipmentDTO GetSingleEquipmentForUser(int id);
 
@@ -21,6 +23,8 @@ namespace TractorTracker.Application.Services.Interfaces
 
 
         bool AssignWorkerToEquipment(List<int> equipmentIds, string employeeIdNumber);
+
+        bool CreateEquipmentFromGeneral(EquipmentGeneralDTO equipmentGeneralDTO, int userId);
 
         bool DeleteEquipment(int id);
     }
