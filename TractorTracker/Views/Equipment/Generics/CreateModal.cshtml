@@ -1,7 +1,4 @@
-﻿@model CoreViewModel<TractorTracker.Web.Models.Interfaces.IBaseInterface>
-
-
-
+﻿
 <div class="modal fade" id="myModal">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -13,18 +10,7 @@
 
             <!-- Modal Body (Place your form inside this div) -->
             <div class="modal-body">
-                <form action="@Url.Action("Update", "Equipment")" method="POST">
-                    @foreach (var property in Model.BaseModel.GetType().GetProperties())
-                    {
-                        <div class="form-group">
-                            <label asp-for="@property.Name">@property.Name</label>
-                            <input asp-for="@property.Name" class="form-control" />
-                            <span asp-validation-for="@property.Name" class="text-danger"></span>
-
-                        </div>
-                    }
-                    <button type="submit" class="btn btn-primary">Create</button>
-                </form>
+               
             </div>
 
             <!-- Modal Footer (Optional) -->

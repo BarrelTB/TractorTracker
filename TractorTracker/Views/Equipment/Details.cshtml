@@ -14,7 +14,7 @@
         </ul>
     </div>
 
-
+    @await Html.PartialAsync("Generics/CreateModal.cshtml")
 
     <div id="chassis" class="card equipment-card">
         <h3 class="card-title">@Html.LabelFor(m => m.Chassis)</h3>
@@ -63,26 +63,106 @@
 
 <script>
     $(document).ready(function () {
-        // Handle button click event
+
         $('.btn-primary').click(function () {
             var modalId = $(this).data('target'); // Get modal ID
-            var contentId = $(this).data('itemid'); // Get content ID or data
+            var contentId = $(this).data('modelId'); // Get content ID
 
-            // Fetch content or data based on contentId
-            // For example, you can make an Ajax call here to fetch content dynamically
-            var content = getContent(contentId); // Implement getContent function according to your needs
+            console.log('here in the click', $(this).data());
+
+            var content = getContent(contentId); 
+            
 
             // Update modal content
-            $(modalId).find('.modal-body').html(content);
+            updateModalContent(modalId, content);
         });
+
+        function getContent(contentId) {
+
+
+            switch (contentId) {
+                case 'location':
+                    var locationModel = $('#locationModel').val();
+                    return createCoreViewModel(locationModel, 0);
+
+                case 'chassis':
+                    var chassisModel = $('#chassisModel').val();
+                    return createCoreViewModel(chassisModel, 0);
+
+                case 'engine':
+                    var engineModel = $('#engineModel').val();
+                    return createCoreViewModel(engineModel, 0);
+
+                case 'transmission':
+                    var transmissionModel = $('#transmissionModel').val();
+                    return createCoreViewModel(transmissionModel, 0);
+
+                case 'part':
+                    var partModel = $('#partModel').val();
+                    return createCoreViewModel(partModel, 0);
+
+                case 'wheel':
+                    var wheelModel = $('#wheelModel').val();
+                    return createCoreViewModel(wheelModel, 0);
+
+                case 'worker':
+                    var workerModel = $('#workerModel').val();
+                    return createCoreViewModel(workerModel, 0);
+
+                case 'note':
+                    var noteModel = $('#noteModel').val();
+                    return createCoreViewModel(noteModel, 0);
+
+                default:
+                    return '';
+            }
+
+        }
+
+        function createCoreViewModel(baseModel, id) {
+            return {
+                BaseModel: baseModel,
+                Id: id
+            };
+        }
+
+        function updateModalContent(modalId, content) {
+            var modalBody = $(modalId).find('.modal-body');
+            console.log('here is the base model', content.BaseModel);
+            var baseModel = JSON.parse(content.BaseModel);
+
+            // Clear existing form fields
+            modalBody.empty();
+
+            // Create new form fields based on the model properties
+            for (var propertyName in baseModel) {
+                console.log('prop name i guess', propertyName);
+                if (baseModel.hasOwnProperty(propertyName)) {
+                    var propertyValue = baseModel[propertyName];
+                    console.log('in the for loop', propertyValue);
+
+                    var formGroup = $('<div>').addClass('form-group');
+                    var label = $('<label>').text(propertyName);
+                    var input = $('<input>').attr({
+                        type: 'text',
+                        name: propertyName,
+                        value: propertyValue,
+                        class: 'form-control'
+                    });
+                    var validationSpan = $('<span>').addClass('text-danger').attr('asp-validation-for', propertyName);
+
+                    formGroup.append(label, input, validationSpan);
+                    modalBody.append(formGroup);
+                }
+            }
+
+            // Add submit button
+            var submitButton = $('<button>').attr({
+                type: 'submit',
+                class: 'btn btn-primary'
+            }).text('Create');
+            modalBody.append(submitButton);
+        }
     });
-
-    // Example function to fetch content dynamically
-    function getContent(contentId) {
-        // Implement logic to fetch content based on contentId
-        // This can be an Ajax call to a server-side endpoint
-        // For demonstration purposes, returning static content
-        console.log(contentId + 'heres the content id');
-
-    }
+    
 </script>

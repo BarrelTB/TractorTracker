@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Rendering
+@using Newtonsoft.Json
 @inject IHtmlHelper<TractorTracker.Web.Models.BaseModels.Engine> Html
 
 @model TractorTracker.Web.Models.BaseModels.Engine
@@ -17,24 +18,20 @@
         <li>@Html.LabelFor(m => m.LastOilChange) @Model.LastOilChange</li>
         <li>@Html.LabelFor(m => m.LastFilterChange) @Model.LastFilterChange</li>
     </ul>
+    var jsonEngine = JsonConvert.SerializeObject(Model);
+    <input type="hidden" id="engineModel" value="@jsonEngine" />
 
-    @await Html.PartialAsync("~/Views/Equipment/Generics/CreateModal.cshtml", new CoreViewModel<TractorTracker.Web.Models.Interfaces.IBaseInterface>
-{
-    BaseModel = Model,
-    Id = 0
-})
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-itemid="engine" data-model-id="@Model.SerialNumber">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-itemid="engine" data-model-id="engine">
         Update Engine
     </button>
 }
 else
 {
-    @await Html.PartialAsync("~/Views/Equipment/Generics/CreateModal.cshtml", new CoreViewModel<TractorTracker.Web.Models.Interfaces.IBaseInterface>
-{
-    BaseModel = new TractorTracker.Web.Models.BaseModels.Engine(),
-    Id = 0
-})
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-itemid="engine" data-model-id="newEngine">
+    var newEngine = new TractorTracker.Web.Models.BaseModels.Engine();
+    var jsonEngine = JsonConvert.SerializeObject(newEngine);
+    <input type="hidden" id="engineModel" value="@jsonEngine" />
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-itemid="engine" data-model-id="engine">
         Add Engine
     </button>
 

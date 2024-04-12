@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Rendering
+@using Newtonsoft.Json
 @inject IHtmlHelper<List<TractorTracker.Web.Models.BaseModels.Part>> Html
 
 @model List<TractorTracker.Web.Models.BaseModels.Part>
@@ -18,11 +19,13 @@
 
 	}
 }
-@await Html.PartialAsync("~/Views/Equipment/Generics/CreateModal.cshtml", new CoreViewModel<TractorTracker.Web.Models.Interfaces.IBaseInterface>
-{
-	BaseModel = new TractorTracker.Web.Models.BaseModels.Part(),
-	Id = 0
-})
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-itemid="part" data-model-id="addPart">
+   
+@{
+	var newPart = new TractorTracker.Web.Models.BaseModels.Part();
+	var jsonPart = JsonConvert.SerializeObject(newPart);
+}
+   
+<input type="hidden" id="partModel" value="@jsonPart" />
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-itemid="part" data-model-id="part">
 	Add Part
 </button>
