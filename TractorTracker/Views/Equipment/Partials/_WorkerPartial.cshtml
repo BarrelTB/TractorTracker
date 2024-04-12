@@ -1,0 +1,19 @@
+﻿@model List<TractorTracker.Web.Models.BaseModels.Worker>
+
+@if (Model != null && Model.Count > 0)
+{
+	foreach (var worker in Model)
+	{
+		<div class="worker">
+			<ul>
+				<li>@Html.LabelFor(m => m.FirstOrDefault().FirstName) @worker.FirstName</li>
+				<li>@Html.LabelFor(m => m.FirstOrDefault().LastName) @worker.LastName</li>
+				<li>@Html.LabelFor(m => m.FirstOrDefault().EmployeeIdNumber) @worker.EmployeeIdNumber</li>
+				<li>@Html.LabelFor(m => m.FirstOrDefault().DateOfBirth) @worker.DateOfBirth</li>
+				<li>@Html.LabelFor(m => m.FirstOrDefault().YearsOfService) @worker.YearsOfService</li>
+				<li>@Html.LabelFor(m => m.FirstOrDefault().MonthsOfService) @worker.MonthsOfService</li>
+			</ul>
+		</div>
+
+	}
+}

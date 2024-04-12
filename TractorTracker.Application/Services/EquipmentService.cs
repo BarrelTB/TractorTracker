@@ -42,11 +42,11 @@ namespace TractorTracker.Application.Services
 
         }
 
-        public EquipmentDTO GetSingleEquipmentForUser(int id)
+        public EquipmentDTO GetSingleEquipmentForUser(int equipmentId)
         {
             using (_coreDbContext)
             {
-                var equipment = _coreDbContext.Equipment.Where(e => e.Id == id && e.IsDeleted == false).First();
+                var equipment = _coreDbContext.Equipment.Where(e => e.Id == equipmentId && e.IsDeleted == false).First();
                 var equipmentDTO = _mapper.Map<Equipment, EquipmentDTO>(equipment);
                 return equipmentDTO;
             }
@@ -110,6 +110,28 @@ namespace TractorTracker.Application.Services
                     _coreDbContext.Location.Add(equipmentGeneral.Location);
 
                     _coreDbContext.Equipment.Add(equipmentGeneral);
+                    _coreDbContext.SaveChanges();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+
+            }
+        }
+
+        public bool UpdateEquipment(EquipmentDTO equipmentDTO, int userId)
+        {
+            using (_coreDbContext)
+            {
+                try
+                {
+                    var equipment = _mapper.Map<EquipmentDTO, Equipment>(equipmentDTO);
+                    equipment.UserId = userId;
+
+                    _coreDbContext.Equipment.Add(equipment);
+
                     _coreDbContext.SaveChanges();
                     return true;
                 }

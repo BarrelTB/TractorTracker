@@ -1,0 +1,17 @@
+﻿@model List<TractorTracker.Web.Models.BaseModels.Part>
+
+@if (Model != null && Model.Count > 0)
+{
+	foreach (var part in Model)
+	{
+		<div class="part">
+			<ul>
+				<li>@Html.LabelFor(m => m.FirstOrDefault().SerialNumber) @part.SerialNumber</li>
+				<li>@Html.LabelFor(m => m.FirstOrDefault().Name) @part.Name</li>
+				<li>@Html.LabelFor(m => m.FirstOrDefault().Type) @part.Type</li>
+				<li>@Html.LabelFor(m => m.FirstOrDefault().Quantity) @part.Quantity</li>
+			</ul>
+		</div>
+
+	}
+}

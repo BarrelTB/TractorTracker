@@ -16,7 +16,7 @@ namespace TractorTracker.Application.Services.Interfaces
         List<EquipmentGeneralDTO> GetAllEquipmentGeneralForUser(int userId);
 
 
-        EquipmentDTO GetSingleEquipmentForUser(int id);
+        EquipmentDTO GetSingleEquipmentForUser(int equipmentId);
 
 
         List<EquipmentDTO> GetAllEquipmentWithLastChangeDateBeforeGivenDate(int userId, DateTime minLastChangeDate);
@@ -25,6 +25,8 @@ namespace TractorTracker.Application.Services.Interfaces
         bool AssignWorkerToEquipment(List<int> equipmentIds, string employeeIdNumber);
 
         bool CreateEquipmentFromGeneral(EquipmentGeneralDTO equipmentGeneralDTO, int userId);
+
+        bool UpdateEquipment(EquipmentDTO equipmentDTO, int userId);
 
         bool DeleteEquipment(int id);
     }

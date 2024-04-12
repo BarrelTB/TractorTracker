@@ -1,0 +1,15 @@
+﻿@model List<TractorTracker.Web.Models.BaseModels.Note>
+
+@if (Model != null && Model.Count > 0)
+{
+	foreach(var note in Model)
+	{
+		<div class="note">
+			<ul>
+				<li>@Html.LabelFor(m => m.FirstOrDefault().Title) @note.Title</li>
+				<li>@Html.LabelFor(m => m.FirstOrDefault().Description) @note.Description</li>
+			</ul>
+		</div>
+		
+	}
+}

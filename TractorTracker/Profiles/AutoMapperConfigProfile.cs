@@ -20,6 +20,9 @@ namespace TractorTracker.Web.Profiles
             CreateMap<LocationGeneralDTO, LocationGeneral>().ReverseMap();
             CreateMap<NoteDTO, Note>().ReverseMap();
             CreateMap<PartDTO, Part>().ReverseMap();
+            CreateMap<RimDTO, Rim>().ReverseMap();
+            CreateMap<TireDTO, Tire>().ReverseMap();
+            CreateMap<WheelDTO, Wheel>().ReverseMap();
             CreateMap<TransmissionDTO, Transmission>().ReverseMap();
             CreateMap<WorkerDTO, Worker>().ReverseMap();
             CreateMap<EquipmentDTO, EquipmentViewModel>().ReverseMap();

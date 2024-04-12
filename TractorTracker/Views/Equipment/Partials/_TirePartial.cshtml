@@ -1,0 +1,14 @@
+﻿@model TractorTracker.Web.Models.BaseModels.Tire
+
+@if (Model != null)
+{
+    
+        <ul>
+            <li>@Html.LabelFor(m => m.SerialNumber) @Model.SerialNumber</li>
+            <li>@Html.LabelFor(m => m.Brand) @Model.Brand</li>
+            <li>@Html.LabelFor(m => m.Size) @Model.Size</li>
+            <li>@Html.LabelFor(m => m.Psi) @Model.Psi</li>
+            <li>@Html.LabelFor(m => m.TreadPattern) @Model.TreadPattern</li>
+            <li>@Html.LabelFor(m => m.WearRating) @Model.WearRating</li>
+        </ul>
+}

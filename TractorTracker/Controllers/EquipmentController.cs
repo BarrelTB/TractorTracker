@@ -22,7 +22,7 @@ namespace TractorTracker.Web.Controllers
         }
 
         // GET: EquipmentController
-        public ActionResult Index()
+        public IActionResult Index()
         {
             try
             {
@@ -40,9 +40,26 @@ namespace TractorTracker.Web.Controllers
             
         }
 
+        // GET: EquipmentController/Details
+        public IActionResult Details(int id)
+        {
+            try
+            {
+                var equipment = _equipmentService.GetSingleEquipmentForUser(id);
+                var equipmentViewModel = _mapper.Map<EquipmentDTO, EquipmentViewModel>(equipment);
+
+                return View(equipmentViewModel);
+
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction(nameof(Error));
+            }
+        }
+
         // POST: EquipmentController/Create
         [HttpPost]
-        public ActionResult Create(EquipmentGeneralViewModel equipmentViewModel)
+        public IActionResult Create(EquipmentGeneralViewModel equipmentViewModel)
         {
             try
             {
@@ -70,10 +87,11 @@ namespace TractorTracker.Web.Controllers
 
         // POST: EquipmentController/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public IActionResult Update(EquipmentViewModel equipmentViewModel)
         {
             try
             {
+                var equipmentDTO = _mapper.Map<EquipmentViewModel, EquipmentDTO> (equipmentViewModel);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -85,7 +103,7 @@ namespace TractorTracker.Web.Controllers
         // POST: EquipmentController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public IActionResult Delete(int id)
         {
             try
             {
