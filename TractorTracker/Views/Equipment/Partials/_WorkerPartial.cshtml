@@ -1,4 +1,6 @@
-﻿@model List<TractorTracker.Web.Models.BaseModels.Worker>
+﻿@using Newtonsoft.Json
+@model List<TractorTracker.Web.Models.BaseModels.Worker>
+
 
 @if (Model != null && Model.Count > 0)
 {
@@ -13,23 +15,23 @@
 				<li>@Html.LabelFor(m => m.FirstOrDefault().YearsOfService) @worker.YearsOfService</li>
 				<li>@Html.LabelFor(m => m.FirstOrDefault().MonthsOfService) @worker.MonthsOfService</li>
 			</ul>
-			@await Html.PartialAsync("~/Views/Equipment/Generics/CreateModal.cshtml", new CoreViewModel<TractorTracker.Web.Models.Interfaces.IBaseInterface>
-{
-	BaseModel = worker,
-	Id = 0
-})
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-itemid="worker" data-model-id="updateWorker">
+			@{
+				var jsonWorkerUpdate = JsonConvert.SerializeObject(Model);
+			}
+			
+			<input type="hidden" id="workerModel" value="@jsonWorkerUpdate" />
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-itemid="worker" data-model-id="worker">
 				Update Worker
 			</button>
 		</div>
 
 	}
 }
-@await Html.PartialAsync("~/Views/Equipment/Generics/CreateModal.cshtml", new CoreViewModel<TractorTracker.Web.Models.Interfaces.IBaseInterface>
-{
-	BaseModel = new TractorTracker.Web.Models.BaseModels.Worker(),
-	Id = 0
-})
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-itemid="worker" data-model-id="addWorker">
+@{
+	var newWorker = new TractorTracker.Web.Models.BaseModels.Worker();
+	var jsonWorker = JsonConvert.SerializeObject(newWorker);
+}	
+<input type="hidden" id="workerModel" value="@jsonWorker" />
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-itemid="worker" data-model-id="worker">
 	Add Worker
 </button>
