@@ -13,7 +13,23 @@
 				<li>@Html.LabelFor(m => m.FirstOrDefault().YearsOfService) @worker.YearsOfService</li>
 				<li>@Html.LabelFor(m => m.FirstOrDefault().MonthsOfService) @worker.MonthsOfService</li>
 			</ul>
+			@await Html.PartialAsync("~/Views/Equipment/Generics/CreateModal.cshtml", new CoreViewModel<TractorTracker.Web.Models.Interfaces.IBaseInterface>
+{
+	BaseModel = worker,
+	Id = 0
+})
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-itemid="worker" data-model-id="updateWorker">
+				Update Worker
+			</button>
 		</div>
 
 	}
 }
+@await Html.PartialAsync("~/Views/Equipment/Generics/CreateModal.cshtml", new CoreViewModel<TractorTracker.Web.Models.Interfaces.IBaseInterface>
+{
+	BaseModel = new TractorTracker.Web.Models.BaseModels.Worker(),
+	Id = 0
+})
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-itemid="worker" data-model-id="addWorker">
+	Add Worker
+</button>

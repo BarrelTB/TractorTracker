@@ -1,4 +1,7 @@
-﻿@model TractorTracker.Web.Models.BaseModels.Chassis
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+@inject IHtmlHelper<TractorTracker.Web.Models.BaseModels.Chassis> Html
+
+@model TractorTracker.Web.Models.BaseModels.Chassis
 
 @if (Model != null)
 {
@@ -8,4 +11,24 @@
         <li>@Html.LabelFor(m => m.RustRating) @Model.RustRating</li>
         <li>@Html.LabelFor(m => m.LastCleaningAndLubricationDate) @Model.LastCleaningAndLubricationDate</li>
     </ul>
+    @await Html.PartialAsync("~/Views/Equipment/Generics/CreateModal.cshtml", new CoreViewModel<TractorTracker.Web.Models.Interfaces.IBaseInterface>
+{
+    BaseModel = Model,
+    Id = 0
+})
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-itemid="chassis" data-model-id="@Model.SerialNumber">
+        Update Chassis
+    </button>
+}
+else
+{
+    @await Html.PartialAsync("~/Views/Equipment/Generics/CreateModal.cshtml", new CoreViewModel<TractorTracker.Web.Models.Interfaces.IBaseInterface>
+{
+        BaseModel = new TractorTracker.Web.Models.BaseModels.Chassis(),
+        Id = 0
+    })
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-itemid="chassis" data-model-id="newChassis">
+        Add Chassis
+    </button>
+
 }

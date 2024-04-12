@@ -1,8 +1,9 @@
 ﻿using TractorTracker.Application.DTOs;
+using TractorTracker.Web.Models.Interfaces;
 
 namespace TractorTracker.Web.Models.BaseModels
 {
-    public class Worker
+    public class Worker : IBaseInterface
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

@@ -1,4 +1,8 @@
-﻿@model TractorTracker.Web.Models.BaseModels.Tire
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+@inject IHtmlHelper<TractorTracker.Web.Models.BaseModels.Tire> Html
+
+
+@model TractorTracker.Web.Models.BaseModels.Tire
 
 @if (Model != null)
 {
@@ -11,4 +15,24 @@
             <li>@Html.LabelFor(m => m.TreadPattern) @Model.TreadPattern</li>
             <li>@Html.LabelFor(m => m.WearRating) @Model.WearRating</li>
         </ul>
+    @await Html.PartialAsync("~/Views/Equipment/Generics/CreateModal.cshtml", new CoreViewModel<TractorTracker.Web.Models.Interfaces.IBaseInterface>
+{
+    BaseModel = Model,
+    Id = 0
+})
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-itemid="tire" data-model-id="updateTire">
+        Update Tire
+    </button>
+}
+else
+{
+    @await Html.PartialAsync("~/Views/Equipment/Generics/CreateModal.cshtml", new CoreViewModel<TractorTracker.Web.Models.Interfaces.IBaseInterface>
+{
+    BaseModel = new TractorTracker.Web.Models.BaseModels.Tire(),
+    Id = 0
+})
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-itemid="tire" data-model-id="addTire">
+        Add Tire
+    </button>
+
 }

@@ -1,4 +1,7 @@
-﻿@model List<TractorTracker.Web.Models.BaseModels.Note>
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+@inject IHtmlHelper<List<TractorTracker.Web.Models.BaseModels.Note>> Html
+
+@model List<TractorTracker.Web.Models.BaseModels.Note>
 
 @if (Model != null && Model.Count > 0)
 {
@@ -13,3 +16,11 @@
 		
 	}
 }
+@await Html.PartialAsync("~/Views/Equipment/Generics/CreateModal.cshtml", new CoreViewModel<TractorTracker.Web.Models.Interfaces.IBaseInterface>
+{
+	BaseModel = new TractorTracker.Web.Models.BaseModels.Note(),
+	Id = 0
+})
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-itemid="note" data-model-id="addNote">
+	Add Note
+</button>

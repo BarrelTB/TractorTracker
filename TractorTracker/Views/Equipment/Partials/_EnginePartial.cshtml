@@ -1,4 +1,7 @@
-﻿@model TractorTracker.Web.Models.BaseModels.Engine
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+@inject IHtmlHelper<TractorTracker.Web.Models.BaseModels.Engine> Html
+
+@model TractorTracker.Web.Models.BaseModels.Engine
 
 @if (Model != null)
 {
@@ -14,4 +17,25 @@
         <li>@Html.LabelFor(m => m.LastOilChange) @Model.LastOilChange</li>
         <li>@Html.LabelFor(m => m.LastFilterChange) @Model.LastFilterChange</li>
     </ul>
+
+    @await Html.PartialAsync("~/Views/Equipment/Generics/CreateModal.cshtml", new CoreViewModel<TractorTracker.Web.Models.Interfaces.IBaseInterface>
+{
+    BaseModel = Model,
+    Id = 0
+})
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-itemid="engine" data-model-id="@Model.SerialNumber">
+        Update Engine
+    </button>
+}
+else
+{
+    @await Html.PartialAsync("~/Views/Equipment/Generics/CreateModal.cshtml", new CoreViewModel<TractorTracker.Web.Models.Interfaces.IBaseInterface>
+{
+    BaseModel = new TractorTracker.Web.Models.BaseModels.Engine(),
+    Id = 0
+})
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-itemid="engine" data-model-id="newEngine">
+        Add Engine
+    </button>
+
 }

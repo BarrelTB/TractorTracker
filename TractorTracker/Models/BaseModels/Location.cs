@@ -1,6 +1,8 @@
-﻿namespace TractorTracker.Web.Models.BaseModels
+﻿using TractorTracker.Web.Models.Interfaces;
+
+namespace TractorTracker.Web.Models.BaseModels
 {
-    public class Location
+    public class Location : IBaseInterface
     {
         public double LatLocation { get; set; }
         public double LongLocation { get; set; }
