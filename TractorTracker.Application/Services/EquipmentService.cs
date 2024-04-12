@@ -121,6 +121,28 @@ namespace TractorTracker.Application.Services
             }
         }
 
+        public bool UpdateEquipment(EquipmentDTO equipmentDTO, int userId)
+        {
+            using (_coreDbContext)
+            {
+                try
+                {
+                    var equipment = _mapper.Map<EquipmentDTO, Equipment>(equipmentDTO);
+                    equipment.UserId = userId;
+
+                    _coreDbContext.Equipment.Add(equipment);
+
+                    _coreDbContext.SaveChanges();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+
+            }
+        }
+
         public bool DeleteEquipment (int id) 
         {
             using (_coreDbContext)

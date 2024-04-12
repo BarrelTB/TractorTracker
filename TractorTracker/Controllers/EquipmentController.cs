@@ -70,10 +70,12 @@ namespace TractorTracker.Web.Controllers
 
         // POST: EquipmentController/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public IActionResult Update(EquipmentViewModel equipmentViewModel)
         {
             try
             {
+                var equipmentDTO = _mapper.Map<EquipmentViewModel, EquipmentDTO> (equipmentViewModel);
+                _equipmentService.
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -85,7 +87,7 @@ namespace TractorTracker.Web.Controllers
         // POST: EquipmentController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id)
         {
             try
             {

@@ -26,6 +26,8 @@ namespace TractorTracker.Application.Services.Interfaces
 
         bool CreateEquipmentFromGeneral(EquipmentGeneralDTO equipmentGeneralDTO, int userId);
 
+        bool UpdateEquipment(EquipmentDTO equipmentDTO, int userId);
+
         bool DeleteEquipment(int id);
     }
 }
