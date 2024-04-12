@@ -20,8 +20,26 @@
                 @await Html.PartialAsync("_TirePartial", wheel.Tire)
             </div>
 
+            @await Html.PartialAsync("~/Views/Equipment/Generics/CreateModal.cshtml", new CoreViewModel<TractorTracker.Web.Models.Interfaces.IBaseInterface>
+{
+    BaseModel = wheel,
+    Id = 0
+})
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-itemid="wheel" data-model-id="updateWheel">
+                Update Wheel
+            </button>
+
         </div>
 
     }
 
 }
+@await Html.PartialAsync("~/Views/Equipment/Generics/CreateModal.cshtml", new CoreViewModel<TractorTracker.Web.Models.Interfaces.IBaseInterface>
+{
+    BaseModel = new TractorTracker.Web.Models.BaseModels.Wheel(),
+    Id = 0
+})
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-itemid="wheel" data-model-id="addWheel">
+    Add Wheel
+</button>
+

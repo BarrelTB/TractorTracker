@@ -14,14 +14,16 @@
         </ul>
     </div>
 
-    <div id="location" class="card equipment-card">
-        <h3 class="card-title">@Html.LabelFor(m => m.Location)</h3>
-        @await Html.PartialAsync("Partials/_LocationPartial", Model.Location)
-    </div>
+
 
     <div id="chassis" class="card equipment-card">
         <h3 class="card-title">@Html.LabelFor(m => m.Chassis)</h3>
         @await Html.PartialAsync("Partials/_ChassisPartial", Model.Chassis)
+    </div>
+
+    <div id="location" class="card equipment-card">
+        <h3 class="card-title">@Html.LabelFor(m => m.Location)</h3>
+        @await Html.PartialAsync("Partials/_LocationPartial", Model.Location)
     </div>
 
     <div id="engine" class="card equipment-card">
@@ -56,3 +58,31 @@
     </div>
 
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // Handle button click event
+        $('.btn-primary').click(function () {
+            var modalId = $(this).data('target'); // Get modal ID
+            var contentId = $(this).data('itemid'); // Get content ID or data
+
+            // Fetch content or data based on contentId
+            // For example, you can make an Ajax call here to fetch content dynamically
+            var content = getContent(contentId); // Implement getContent function according to your needs
+
+            // Update modal content
+            $(modalId).find('.modal-body').html(content);
+        });
+    });
+
+    // Example function to fetch content dynamically
+    function getContent(contentId) {
+        // Implement logic to fetch content based on contentId
+        // This can be an Ajax call to a server-side endpoint
+        // For demonstration purposes, returning static content
+        console.log(contentId + 'heres the content id');
+
+    }
+</script>

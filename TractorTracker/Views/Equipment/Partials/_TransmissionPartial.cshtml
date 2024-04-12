@@ -1,4 +1,8 @@
-﻿@model TractorTracker.Web.Models.BaseModels.Transmission
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+@inject IHtmlHelper<TractorTracker.Web.Models.BaseModels.Transmission> Html
+
+
+@model TractorTracker.Web.Models.BaseModels.Transmission
 
 @if (Model != null)
 {
@@ -9,4 +13,24 @@
         <li>@Html.LabelFor(m => m.LastFluidChange) @Model.LastFluidChange</li>
         <li>@Html.LabelFor(m => m.LastFilterChange) @Model.LastFilterChange</li>
     </ul>
+    @await Html.PartialAsync("~/Views/Equipment/Generics/CreateModal.cshtml", new CoreViewModel<TractorTracker.Web.Models.Interfaces.IBaseInterface>
+{
+    BaseModel = Model,
+    Id = 0
+})
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-itemid="transmission" data-model-id="updateTransmission">
+        Update Transmission
+    </button>
+}
+else
+{
+    @await Html.PartialAsync("~/Views/Equipment/Generics/CreateModal.cshtml", new CoreViewModel<TractorTracker.Web.Models.Interfaces.IBaseInterface>
+{
+    BaseModel = new TractorTracker.Web.Models.BaseModels.Transmission(),
+    Id = 0
+})
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-itemid="transmission" data-model-id="addTransmission">
+        Add Transmission
+    </button>
+
 }

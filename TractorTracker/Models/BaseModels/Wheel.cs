@@ -1,6 +1,8 @@
-﻿namespace TractorTracker.Web.Models.BaseModels
+﻿using TractorTracker.Web.Models.Interfaces;
+
+namespace TractorTracker.Web.Models.BaseModels
 {
-    public class Wheel
+    public class Wheel : IBaseInterface
     {
         public string Brand { get; set; }
         public int BrakeRating { get; set; }
