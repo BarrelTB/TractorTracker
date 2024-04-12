@@ -1,0 +1,11 @@
+﻿@model TractorTracker.Web.Models.BaseModels.Chassis
+
+@if (Model != null)
+{
+    <ul>
+        <li>@Html.LabelFor(m => m.SerialNumber) @Model.SerialNumber</li>
+        <li>@Html.LabelFor(m => m.Weight) @Model.RustRating</li>
+        <li>@Html.LabelFor(m => m.RustRating) @Model.RustRating</li>
+        <li>@Html.LabelFor(m => m.LastCleaningAndLubricationDate) @Model.LastCleaningAndLubricationDate</li>
+    </ul>
+}

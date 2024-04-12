@@ -6,48 +6,48 @@
     }
 </style>
 
-    <div>
-        @if (Model != null && Model.Count > 0)
+<div>
+    @if (Model != null && Model.Count > 0)
+    {
+        @foreach (var equipment in Model)
         {
-            @foreach (var equipment in Model)
-            {
-                <div class="equipment-general-box">
-                    <a asp-controller="Equipment" asp-action="Details" asp-route-id="@equipment.Id" class="btn">@equipment.Name</a>
-                    <ul>
-                        <li>@Html.Label("SerialNumber", "Serial Number") @equipment.Id</li>
-                        <li>@Html.Label("Type") @equipment.Type</li>
-                        <li>@Html.Label("Location") @equipment.Location</li>
-                        <li>@Html.Label("Description") @equipment.Description</li>
-                    </ul>
-                </div>
+            <div class="equipment-general-box">
+                <a asp-controller="Equipment" asp-action="Details" asp-route-id="@equipment.Id" class="btn">@equipment.Name</a>
+                <ul>
+                    <li>@Html.Label("SerialNumber", "Serial Number") @equipment.SerialNumber</li>
+                    <li>@Html.Label("Type") @equipment.Type</li>
+                    <li>@Html.Label("Location") @equipment.Location</li>
+                    <li>@Html.Label("Description") @equipment.Description</li>
+                </ul>
+            </div>
 
-            }
         }
-        else
-        {
-            <p>You currently have no active equipment, please add some equipment!</p>
-        }
-        <button id="showHiddenFormButton" class="btn btn-primary">Add Equipment</button>
-        <div id="hiddenFormContainer" class="hidden-form-container">
-            <form action="@Url.Action("Create", "Equipment")" method="POST">
-                <label for="Name">Name:</label><br>
-                <input type="text" id="name" name="name" required><br>
-                <label for="SerialNumber">Serial Number:</label><br>
-                <input type="text" id="serialNumber" name="serialNumber" required><br>
-                <label for="Type">Type:</label><br>
-                <input type="text" id="type" name="type" required><br>
-                <label for="Location.FieldIdentifier">Field Identifier:</label><br>
-                <input type="text" id="location.FieldIdentifier" name="location.FieldIdentifier"><br>
-                <label for="Location.FieldName">Field Name:</label><br>
-                <input type="text" id="location.FieldName" name="location.FieldName"><br>
-                <label for="Description">Description:</label><br>
-                <input type="text" id="description" name="description"><br>
-                <br><br>
-                <input type="submit" value="Create">
-            </form>
-        </div>
-
+    }
+    else
+    {
+        <p>You currently have no active equipment, please add some equipment!</p>
+    }
+    <button id="showHiddenFormButton" class="btn btn-primary">Add Equipment</button>
+    <div id="hiddenFormContainer" class="hidden-form-container">
+        <form action="@Url.Action("Create", "Equipment")" method="POST">
+            <label for="Name">Name:</label><br>
+            <input type="text" id="name" name="name" required><br>
+            <label for="SerialNumber">Serial Number:</label><br>
+            <input type="text" id="serialNumber" name="serialNumber" required><br>
+            <label for="Type">Type:</label><br>
+            <input type="text" id="type" name="type" required><br>
+            <label for="Location.FieldIdentifier">Field Identifier:</label><br>
+            <input type="text" id="location.FieldIdentifier" name="location.FieldIdentifier"><br>
+            <label for="Location.FieldName">Field Name:</label><br>
+            <input type="text" id="location.FieldName" name="location.FieldName"><br>
+            <label for="Description">Description:</label><br>
+            <input type="text" id="description" name="description"><br>
+            <br><br>
+            <input type="submit" value="Create">
+        </form>
     </div>
+
+</div>
 
 <script>
     $(document).ready(function () {

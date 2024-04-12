@@ -1,0 +1,27 @@
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+@inject IHtmlHelper<List<TractorTracker.Web.Models.BaseModels.Wheel>> Html
+
+@model List<TractorTracker.Web.Models.BaseModels.Wheel>
+
+@if (Model != null && Model.Count > 0)
+{
+    @foreach (var wheel in Model)
+    {
+        <div id="soloWheel">
+            <ul>
+                <li>@Html.LabelFor(m => m.FirstOrDefault().Brand) @wheel.Brand</li>
+                <li>@Html.LabelFor(m => m.FirstOrDefault().BrakeRating) @wheel.BrakeRating</li>
+                <li>@Html.LabelFor(m => m.FirstOrDefault().LastBrakeChange) @wheel.LastBrakeChange</li>
+            </ul>
+            <div id="soloRim">
+                @await Html.PartialAsync("_RimPartial", wheel.Rim)
+            </div>
+            <div id="soloTire">
+                @await Html.PartialAsync("_TirePartial", wheel.Tire)
+            </div>
+
+        </div>
+
+    }
+
+}

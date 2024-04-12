@@ -1,0 +1,58 @@
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+@inject IHtmlHelper<EquipmentViewModel> Html
+
+@model TractorTracker.Web.Models.EquipmentViewModel
+
+<div>
+    @Html.HiddenFor(m => m.Id)
+    <div id="generalEquipment" class="card equipment-card">
+        <h3 class="card-title">@Model.Name</h3>
+        <ul>
+            <li>@Html.LabelFor(m => m.Type) @Model.Type</li>
+            <li>@Html.LabelFor(m => m.SerialNumber) @Model.SerialNumber</li>
+            <li>@Html.LabelFor(m => m.Description) @Model.Description</li>
+        </ul>
+    </div>
+
+    <div id="location" class="card equipment-card">
+        <h3 class="card-title">@Html.LabelFor(m => m.Location)</h3>
+        @await Html.PartialAsync("Partials/_LocationPartial", Model.Location)
+    </div>
+
+    <div id="chassis" class="card equipment-card">
+        <h3 class="card-title">@Html.LabelFor(m => m.Chassis)</h3>
+        @await Html.PartialAsync("Partials/_ChassisPartial", Model.Chassis)
+    </div>
+
+    <div id="engine" class="card equipment-card">
+        <h3 class="card-title">@Html.LabelFor(m => m.Engine)</h3>
+        @await Html.PartialAsync("Partials/_EnginePartial", Model.Engine)
+    </div>
+
+    <div id="transmission" class="card equipment-card">
+        <h3 class="card-title">@Html.LabelFor(m => m.Transmission)</h3>
+        @await Html.PartialAsync("Partials/_TransmissionPartial", Model.Transmission)
+       
+    </div>
+
+    <div id="wheels" class="card equipment-card">
+        <h3 class="card-title">@Html.LabelFor(m => m.Wheels)</h3>
+        @await Html.PartialAsync("Partials/_WheelPartial", Model.Wheels)
+    </div>
+
+    <div id="otherParts" class="card equipment-card">
+        <h3 class="card-title">@Html.LabelFor(m => m.Parts)</h3>
+        @await Html.PartialAsync("Partials/_PartPartial", Model.Parts)
+    </div>
+
+    <div id="workers" class="card equipment-card">
+        <h3 class="card-title">@Html.LabelFor(m => m.Workers)</h3>
+        @await Html.PartialAsync("Partials/_WorkerPartial", Model.Workers)
+    </div>
+
+    <div id="notes" class="card equipment-card">
+        <h3 class="card-title">@Html.LabelFor(m => m.Notes)</h3>
+        @await Html.PartialAsync("Partials/_NotePartial", Model.Notes)
+    </div>
+
+</div>

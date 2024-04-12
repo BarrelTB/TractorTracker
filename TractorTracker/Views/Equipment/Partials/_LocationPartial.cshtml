@@ -1,0 +1,12 @@
+﻿@model TractorTracker.Web.Models.BaseModels.Location
+
+
+@if (Model != null)
+{  
+    <ul>
+        <li>@Html.LabelFor(m => m.FieldIdentifier) @Model.FieldIdentifier</li>
+        <li>@Html.LabelFor(m => m.FieldName) @Model.FieldName</li>
+        <li>@Html.LabelFor(m => m.LatLocation) @Model.LatLocation</li>
+        <li>@Html.LabelFor(m => m.LongLocation) @Model.LongLocation</li>
+    </ul>
+}

@@ -16,7 +16,7 @@ namespace TractorTracker.Application.Services.Interfaces
         List<EquipmentGeneralDTO> GetAllEquipmentGeneralForUser(int userId);
 
 
-        EquipmentDTO GetSingleEquipmentForUser(int id);
+        EquipmentDTO GetSingleEquipmentForUser(int equipmentId);
 
 
         List<EquipmentDTO> GetAllEquipmentWithLastChangeDateBeforeGivenDate(int userId, DateTime minLastChangeDate);

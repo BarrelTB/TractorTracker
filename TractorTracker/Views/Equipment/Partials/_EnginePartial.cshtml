@@ -1,0 +1,17 @@
+﻿@model TractorTracker.Web.Models.BaseModels.Engine
+
+@if (Model != null)
+{
+    <ul>
+        <li>@Html.LabelFor(m => m.SerialNumber) @Model.SerialNumber</li>
+        <li>@Html.LabelFor(m => m.Type) @Model.Type</li>
+        <li>@Html.LabelFor(m => m.Weight) @Model.Weight</li>
+        <li>@Html.LabelFor(m => m.Size) @Model.Size</li>
+        <li>@Html.LabelFor(m => m.HorsePower) @Model.HorsePower</li>
+        <li>@Html.LabelFor(m => m.NumberOfCylinders) @Model.NumberOfCylinders</li>
+        <li>@Html.LabelFor(m => m.Fuel) @Model.Fuel</li>
+        <li>@Html.LabelFor(m => m.OilType) @Model.OilType</li>
+        <li>@Html.LabelFor(m => m.LastOilChange) @Model.LastOilChange</li>
+        <li>@Html.LabelFor(m => m.LastFilterChange) @Model.LastFilterChange</li>
+    </ul>
+}

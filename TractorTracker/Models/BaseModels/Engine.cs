@@ -4,7 +4,7 @@
     {
         public string Type { get; set; }
         public double Weight { get; set; }
-        public double size { get; set; }
+        public double Size { get; set; }
         public int HorsePower { get; set; }
         public int NumberOfCylinders { get; set; }
         public string Fuel { get; set; }

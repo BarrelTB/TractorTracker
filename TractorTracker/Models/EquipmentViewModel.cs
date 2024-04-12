@@ -2,10 +2,9 @@
 
 namespace TractorTracker.Web.Models
 {
-    public class EquipmentViewModel
+    public class EquipmentViewModel : EquipmentBase
     {
         public int Id { get; }
-        public string SerialNumber { get; set; }
         public List<Note> Notes { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -14,6 +13,7 @@ namespace TractorTracker.Web.Models
         public Chassis Chassis { get; set; }
         public Transmission Transmission { get; set; }
         public List<Part> Parts { get; set; }
+        public List<Wheel> Wheels { get; set; }
         public Location Location { get; set; }
         public List<Worker> Workers { get; set; }
     }
